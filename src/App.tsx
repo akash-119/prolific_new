@@ -8,7 +8,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Courses from "./pages/Courses";
 import CoursePage from "./pages/CoursePage";
-import CertificateVerification from "./pages/CertificateVerification";
+// import CertificateVerification from "./pages/CertificateVerification";
 import Placements from "./pages/Placements";
 import Gallery from "./pages/Gallery";
 import NotFound from "./pages/NotFound";
@@ -27,7 +27,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:slug" element={<CoursePage />} />
-          <Route path="/verify" element={<CertificateVerification />} />
+          {/* <Route path="/verify" element={<CertificateVerification />} /> */}
           <Route path="/placements" element={<Placements />} />
           <Route path="/gallery" element={<Gallery />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
