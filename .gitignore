@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+certificate_generation.md
+# Optional npm cache directory

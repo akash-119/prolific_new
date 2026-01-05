@@ -9,7 +9,7 @@ import MegaMenu from "./MegaMenu";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Our Courses", href: "/courses", hasMegaMenu: true },
-  { label: "Certificate Verification", href: "/verify" },
+  // { label: "Certificate Verification", href: "/verify" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
   { label: "Office Gallery", href: "/gallery" },
@@ -28,9 +28,9 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Prolific Systems & Technologies" className="h-10 lg:h-12 w-auto" />
-            <div className="hidden sm:block">
+            {/* <div className="hidden sm:block">
               <span className="text-lg lg:text-xl font-heading font-bold text-primary">Systems & Technologies</span>
-            </div>
+            </div> */}
           </Link>
 
           {/* Desktop Navigation */}
