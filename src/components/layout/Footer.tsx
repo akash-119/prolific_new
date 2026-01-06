@@ -35,7 +35,7 @@ const Footer = () => {
               <img src={logo} alt="Prolific" className="h-10 brightness-0 invert" />
             </div>
             <p className="text-card/70 text-sm mb-6">
-              Pioneer in Industrial Automation Training Since 1997. Empowering professionals with cutting-edge technical skills for industry success.
+              Pioneer in Industrial Automation Training Since 2012. Empowering professionals with cutting-edge technical skills for industry success.
             </p>
             <div className="flex gap-3">
               <a href="#" className="p-2 bg-card/10 rounded-full hover:bg-primary transition-colors">

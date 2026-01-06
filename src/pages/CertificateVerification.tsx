@@ -1,22 +1,97 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link, useSearchParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, CheckCircle, XCircle, Shield, Award } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { Search, CheckCircle, XCircle, Shield, Award, ExternalLink } from "lucide-react";
+import { format } from "date-fns";
+
+interface VerificationResult {
+  status: 'idle' | 'loading' | 'valid' | 'revoked' | 'not_found';
+  data?: {
+    certificate_number: string;
+    student_name: string;
+    course_name: string;
+    center_name: string;
+    issue_date: string;
+    validity_date: string | null;
+    grade: string;
+    cert_status: string;
+  };
+}
 
 const CertificateVerification = () => {
-  const [certificateNumber, setCertificateNumber] = useState("");
-  const [verificationResult, setVerificationResult] = useState<"idle" | "valid" | "invalid">("idle");
-  const [isLoading, setIsLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+  const initialCert = searchParams.get('cert') || '';
+  const [certificateNumber, setCertificateNumber] = useState(initialCert);
+  const [result, setResult] = useState<VerificationResult>({ status: 'idle' });
 
-  const handleVerify = () => {
-    setIsLoading(true);
-    // Simulate verification
-    setTimeout(() => {
-      setVerificationResult(certificateNumber.length > 5 ? "valid" : "invalid");
-      setIsLoading(false);
-    }, 1500);
+  const handleVerify = async () => {
+    if (!certificateNumber.trim()) return;
+
+    setResult({ status: 'loading' });
+
+    try {
+      const { data, error } = await supabase
+        .from('certificates')
+        .select(`
+          certificate_number,
+          course_name,
+          issue_date,
+          validity_date,
+          grade,
+          status,
+          students (
+            full_name,
+            center_name
+          )
+        `)
+        .eq('certificate_number', certificateNumber.trim().toUpperCase())
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (!data) {
+        setResult({ status: 'not_found' });
+        return;
+      }
+
+      if (data.status === 'REVOKED' || data.status === 'EXPIRED') {
+        setResult({
+          status: 'revoked',
+          data: {
+            certificate_number: data.certificate_number,
+            student_name: data.students?.full_name || 'N/A',
+            course_name: data.course_name,
+            center_name: data.students?.center_name || 'N/A',
+            issue_date: data.issue_date,
+            validity_date: data.validity_date,
+            grade: data.grade,
+            cert_status: data.status,
+          }
+        });
+        return;
+      }
+
+      setResult({
+        status: 'valid',
+        data: {
+          certificate_number: data.certificate_number,
+          student_name: data.students?.full_name || 'N/A',
+          course_name: data.course_name,
+          center_name: data.students?.center_name || 'N/A',
+          issue_date: data.issue_date,
+          validity_date: data.validity_date,
+          grade: data.grade,
+          cert_status: data.status,
+        }
+      });
+    } catch (error) {
+      console.error('Verification error:', error);
+      setResult({ status: 'not_found' });
+    }
   };
 
   return (
@@ -55,7 +130,7 @@ const CertificateVerification = () => {
                     Enter Certificate Number
                   </h2>
                   <p className="text-sm text-muted-foreground">
-                    Find your certificate number on the bottom right of your certificate
+                    Example: PROLIFIC-2026-000001
                   </p>
                 </div>
               </div>
@@ -64,80 +139,143 @@ const CertificateVerification = () => {
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
-                    placeholder="e.g., PROL-2024-001234"
+                    placeholder="Enter certificate number..."
                     value={certificateNumber}
                     onChange={(e) => {
-                      setCertificateNumber(e.target.value);
-                      setVerificationResult("idle");
+                      setCertificateNumber(e.target.value.toUpperCase());
+                      if (result.status !== 'idle' && result.status !== 'loading') {
+                        setResult({ status: 'idle' });
+                      }
                     }}
-                    className="pl-10"
+                    onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
+                    className="pl-10 uppercase"
                   />
                 </div>
                 <Button
                   variant="default"
                   onClick={handleVerify}
-                  disabled={!certificateNumber || isLoading}
+                  disabled={!certificateNumber.trim() || result.status === 'loading'}
                 >
-                  {isLoading ? "Verifying..." : "Verify"}
+                  {result.status === 'loading' ? "Verifying..." : "Verify"}
                 </Button>
               </div>
             </motion.div>
 
-            {/* Verification Result */}
-            {verificationResult !== "idle" && (
+            {/* Verification Result - Valid */}
+            {result.status === 'valid' && result.data && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className={`p-6 rounded-xl ${
-                  verificationResult === "valid"
-                    ? "bg-accent/10 border border-accent"
-                    : "bg-destructive/10 border border-destructive"
-                }`}
+                className="p-6 rounded-xl bg-accent/10 border border-accent"
               >
-                <div className="flex items-center gap-4">
-                  {verificationResult === "valid" ? (
-                    <>
-                      <CheckCircle className="h-12 w-12 text-accent" />
-                      <div>
-                        <h3 className="text-xl font-bold text-accent">Certificate Verified!</h3>
-                        <p className="text-muted-foreground">
-                          This certificate is authentic and was issued by Prolific Systems & Technologies.
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <XCircle className="h-12 w-12 text-destructive" />
-                      <div>
-                        <h3 className="text-xl font-bold text-destructive">Certificate Not Found</h3>
-                        <p className="text-muted-foreground">
-                          Please check the certificate number and try again. Contact us if you need assistance.
-                        </p>
-                      </div>
-                    </>
-                  )}
+                <div className="flex items-center gap-4 mb-6">
+                  <CheckCircle className="h-12 w-12 text-accent" />
+                  <div>
+                    <h3 className="text-xl font-bold text-accent">Certificate Verified!</h3>
+                    <p className="text-muted-foreground">
+                      This certificate is authentic and valid.
+                    </p>
+                  </div>
                 </div>
 
-                {verificationResult === "valid" && (
-                  <div className="mt-6 pt-6 border-t border-accent/20 grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="text-muted-foreground">Certificate Holder</p>
-                      <p className="font-medium text-foreground">Sample Student Name</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">Course</p>
-                      <p className="font-medium text-foreground">PLC SCADA Training</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">Issue Date</p>
-                      <p className="font-medium text-foreground">January 2024</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">Valid Until</p>
-                      <p className="font-medium text-foreground">Lifetime</p>
-                    </div>
+                <div className="grid grid-cols-2 gap-4 text-sm mb-6">
+                  <div>
+                    <p className="text-muted-foreground">Certificate Number</p>
+                    <p className="font-mono font-medium text-foreground">{result.data.certificate_number}</p>
                   </div>
-                )}
+                  <div>
+                    <p className="text-muted-foreground">Student Name</p>
+                    <p className="font-medium text-foreground">{result.data.student_name}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Course</p>
+                    <p className="font-medium text-foreground">{result.data.course_name}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Grade</p>
+                    <p className="font-medium text-foreground">{result.data.grade}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Issue Date</p>
+                    <p className="font-medium text-foreground">
+                      {format(new Date(result.data.issue_date), 'MMMM dd, yyyy')}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Valid Until</p>
+                    <p className="font-medium text-foreground">
+                      {result.data.validity_date 
+                        ? format(new Date(result.data.validity_date), 'MMMM dd, yyyy')
+                        : 'Lifetime'}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Center</p>
+                    <p className="font-medium text-foreground">{result.data.center_name}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Status</p>
+                    <p className="font-medium text-accent">{result.data.cert_status}</p>
+                  </div>
+                </div>
+
+                <Button asChild className="w-full">
+                  <Link to={`/certificate/${result.data.certificate_number}`}>
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    View Full Certificate
+                  </Link>
+                </Button>
+              </motion.div>
+            )}
+
+            {/* Verification Result - Revoked/Expired */}
+            {result.status === 'revoked' && result.data && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-6 rounded-xl bg-destructive/10 border border-destructive"
+              >
+                <div className="flex items-center gap-4">
+                  <XCircle className="h-12 w-12 text-destructive" />
+                  <div>
+                    <h3 className="text-xl font-bold text-destructive">
+                      Certificate {result.data.cert_status === 'REVOKED' ? 'Revoked' : 'Expired'}
+                    </h3>
+                    <p className="text-muted-foreground">
+                      This certificate exists but is no longer valid.
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-destructive/20">
+                  <p className="text-sm text-muted-foreground">
+                    Certificate Number: <span className="font-mono">{result.data.certificate_number}</span>
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Student: {result.data.student_name}
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Please contact our office for more information.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Verification Result - Not Found */}
+            {result.status === 'not_found' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-6 rounded-xl bg-destructive/10 border border-destructive"
+              >
+                <div className="flex items-center gap-4">
+                  <XCircle className="h-12 w-12 text-destructive" />
+                  <div>
+                    <h3 className="text-xl font-bold text-destructive">Certificate Not Found</h3>
+                    <p className="text-muted-foreground">
+                      Please check the certificate number and try again. Contact us if you need assistance.
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             )}
 
@@ -153,7 +291,7 @@ const CertificateVerification = () => {
                 <span>All certificates include security features</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Our certificates contain QR codes, unique serial numbers, and holographic seals for authenticity verification.
+                Our certificates contain QR codes, unique serial numbers, and digital verification for authenticity.
               </p>
             </motion.div>
           </div>

@@ -7,22 +7,155 @@ import { Clock, Users, ArrowRight, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const allCourses = [
-  { id: 1, title: "PLC SCADA Training", category: "Automation", duration: "3-6 Months", mode: "Classroom/Online", description: "Master industrial automation with hands-on PLC and SCADA programming." },
-  { id: 2, title: "Industrial Automation & Robotics", category: "Automation", duration: "6 Months", mode: "Classroom", description: "Comprehensive training in industrial robots and automation systems." },
-  { id: 3, title: "Post Graduate Diploma in Industrial Automation", category: "Automation", duration: "12 Months", mode: "Classroom", description: "Complete diploma program covering all aspects of industrial automation." },
-  { id: 4, title: "Certified DCS Application Developer", category: "Automation", duration: "4 Months", mode: "Classroom", description: "Learn Distributed Control Systems for process industries." },
-  { id: 5, title: "Machine Learning", category: "IT & Data", duration: "4 Months", mode: "Hybrid", description: "Learn ML algorithms and build predictive models using Python." },
-  { id: 6, title: "Data Analytics", category: "IT & Data", duration: "3 Months", mode: "Classroom/Online", description: "Master Excel, SQL, Power BI, and Tableau for data-driven decisions." },
-  { id: 7, title: "Data Science", category: "IT & Data", duration: "6 Months", mode: "Hybrid", description: "Complete data science program with Python, Statistics, and ML." },
-  { id: 8, title: "Python Programming", category: "IT & Data", duration: "2 Months", mode: "Classroom/Online", description: "Learn Python from basics to advanced programming concepts." },
-  { id: 9, title: "SolidWorks", category: "Designing", duration: "2-3 Months", mode: "Classroom", description: "Professional 3D CAD modeling for mechanical design." },
-  { id: 10, title: "AutoCAD", category: "Designing", duration: "2 Months", mode: "Classroom/Online", description: "Industry-standard CAD software for civil and mechanical drafting." },
-  { id: 11, title: "Revit Architecture", category: "Designing", duration: "3 Months", mode: "Classroom", description: "Building Information Modeling for architecture and construction." },
-  { id: 12, title: "CATIA", category: "Designing", duration: "3 Months", mode: "Classroom", description: "Advanced CAD/CAM/CAE for automotive and aerospace design." },
-  { id: 13, title: "Embedded Systems Development", category: "Automation", duration: "4-6 Months", mode: "Classroom", description: "Learn microcontroller programming and embedded system design." },
-  { id: 14, title: "Electrical Engineering Programs", category: "Automation", duration: "3-6 Months", mode: "Classroom", description: "Comprehensive electrical engineering and power systems training." },
-  { id: 15, title: "Power BI", category: "IT & Data", duration: "1 Month", mode: "Classroom/Online", description: "Business intelligence and data visualization with Microsoft Power BI." },
-  { id: 16, title: "NX CAD", category: "Designing", duration: "3 Months", mode: "Classroom", description: "Advanced 3D CAD software for product design and manufacturing." },
+
+  { 
+    id: "plc-scada-training", 
+    title: "PLC SCADA Training", 
+    category: "Automation", 
+    duration: "3-6 Months", 
+    mode: "Classroom/Online", 
+    description: "Master industrial automation with hands-on PLC and SCADA programming." 
+  },
+  { 
+    id: "industrial-automation-robotics", 
+    title: "Industrial Automation & Robotics", 
+    category: "Automation", 
+    duration: "6 Months", 
+    mode: "Classroom", 
+    description: "Comprehensive training in industrial robots and automation systems." 
+  },
+  { 
+    id: "post-graduate-diploma-industrial-automation", 
+    title: "Post Graduate Diploma in Industrial Automation", 
+    category: "Automation", 
+    duration: "12 Months", 
+    mode: "Classroom", 
+    description: "Complete diploma program covering all aspects of industrial automation." 
+  },
+  { 
+    id: "certified-dcs-application-developer", 
+    title: "Certified DCS Application Developer", 
+    category: "Automation", 
+    duration: "4 Months", 
+    mode: "Classroom", 
+    description: "Learn Distributed Control Systems for process industries." 
+  },
+  { 
+    id: "machine-learning", 
+    title: "Machine Learning", 
+    category: "IT & Data", 
+    duration: "4 Months", 
+    mode: "Hybrid", 
+    description: "Learn ML algorithms and build predictive models using Python." 
+  },
+  { 
+    id: "data-analytics", 
+    title: "Data Analytics", 
+    category: "IT & Data", 
+    duration: "3 Months", 
+    mode: "Classroom/Online", 
+    description: "Master Excel, SQL, Power BI, and Tableau for data-driven decisions." 
+  },
+  { 
+    id: "data-science", 
+    title: "Data Science", 
+    category: "IT & Data", 
+    duration: "6 Months", 
+    mode: "Hybrid", 
+    description: "Complete data science program with Python, Statistics, and ML." 
+  },
+  { 
+    id: "python-programming", 
+    title: "Python Programming", 
+    category: "IT & Data", 
+    duration: "2 Months", 
+    mode: "Classroom/Online", 
+    description: "Learn Python from basics to advanced programming concepts." 
+  },
+  { 
+    id: "solidworks", 
+    title: "SolidWorks", 
+    category: "Designing", 
+    duration: "2-3 Months", 
+    mode: "Classroom", 
+    description: "Professional 3D CAD modeling for mechanical design." 
+  },
+  { 
+    id: "autocad", 
+    title: "AutoCAD", 
+    category: "Designing", 
+    duration: "2 Months", 
+    mode: "Classroom/Online", 
+    description: "Industry-standard CAD software for civil and mechanical drafting." 
+  },
+  { 
+    id: "revit-architecture", 
+    title: "Revit Architecture", 
+    category: "Designing", 
+    duration: "3 Months", 
+    mode: "Classroom", 
+    description: "Building Information Modeling for architecture and construction." 
+  },
+  { 
+    id: "catia", 
+    title: "CATIA", 
+    category: "Designing", 
+    duration: "3 Months", 
+    mode: "Classroom", 
+    description: "Advanced CAD/CAM/CAE for automotive and aerospace design." 
+  },
+  { 
+    id: "embedded-systems-development", 
+    title: "Embedded Systems Development", 
+    category: "Automation", 
+    duration: "4-6 Months", 
+    mode: "Classroom", 
+    description: "Learn microcontroller programming and embedded system design." 
+  },
+  { 
+    id: "electrical-engineering-programs", 
+    title: "Electrical Engineering Programs", 
+    category: "Automation", 
+    duration: "3-6 Months", 
+    mode: "Classroom", 
+    description: "Comprehensive electrical engineering and power systems training." 
+  },
+  { 
+    id: "power-bi", 
+    title: "Power BI", 
+    category: "IT & Data", 
+    duration: "1 Month", 
+    mode: "Classroom/Online", 
+    description: "Business intelligence and data visualization with Microsoft Power BI." 
+  },
+  { 
+    id: "nx-cad", 
+    title: "NX CAD", 
+    category: "Designing", 
+    duration: "3 Months", 
+    mode: "Classroom", 
+    description: "Advanced 3D CAD software for product design and manufacturing." 
+  }
+
+
+
+  // { id: 1, title: "PLC SCADA Training", category: "Automation", duration: "3-6 Months", mode: "Classroom/Online", description: "Master industrial automation with hands-on PLC and SCADA programming." },
+  // { id: 2, title: "Industrial Automation & Robotics", category: "Automation", duration: "6 Months", mode: "Classroom", description: "Comprehensive training in industrial robots and automation systems." },
+  // { id: 3, title: "Post Graduate Diploma in Industrial Automation", category: "Automation", duration: "12 Months", mode: "Classroom", description: "Complete diploma program covering all aspects of industrial automation." },
+  // { id: 4, title: "Certified DCS Application Developer", category: "Automation", duration: "4 Months", mode: "Classroom", description: "Learn Distributed Control Systems for process industries." },
+  // { id: 5, title: "Machine Learning", category: "IT & Data", duration: "4 Months", mode: "Hybrid", description: "Learn ML algorithms and build predictive models using Python." },
+  // { id: 6, title: "Data Analytics", category: "IT & Data", duration: "3 Months", mode: "Classroom/Online", description: "Master Excel, SQL, Power BI, and Tableau for data-driven decisions." },
+  // { id: 7, title: "Data Science", category: "IT & Data", duration: "6 Months", mode: "Hybrid", description: "Complete data science program with Python, Statistics, and ML." },
+  // { id: 8, title: "Python Programming", category: "IT & Data", duration: "2 Months", mode: "Classroom/Online", description: "Learn Python from basics to advanced programming concepts." },
+  // { id: 9, title: "SolidWorks", category: "Designing", duration: "2-3 Months", mode: "Classroom", description: "Professional 3D CAD modeling for mechanical design." },
+  // { id: 10, title: "AutoCAD", category: "Designing", duration: "2 Months", mode: "Classroom/Online", description: "Industry-standard CAD software for civil and mechanical drafting." },
+  // { id: 11, title: "Revit Architecture", category: "Designing", duration: "3 Months", mode: "Classroom", description: "Building Information Modeling for architecture and construction." },
+  // { id: 12, title: "CATIA", category: "Designing", duration: "3 Months", mode: "Classroom", description: "Advanced CAD/CAM/CAE for automotive and aerospace design." },
+  // { id: 13, title: "Embedded Systems Development", category: "Automation", duration: "4-6 Months", mode: "Classroom", description: "Learn microcontroller programming and embedded system design." },
+  // { id: 14, title: "Electrical Engineering Programs", category: "Automation", duration: "3-6 Months", mode: "Classroom", description: "Comprehensive electrical engineering and power systems training." },
+  // { id: 15, title: "Power BI", category: "IT & Data", duration: "1 Month", mode: "Classroom/Online", description: "Business intelligence and data visualization with Microsoft Power BI." },
+  // { id: 16, title: "NX CAD", category: "Designing", duration: "3 Months", mode: "Classroom", description: "Advanced 3D CAD software for product design and manufacturing." },
+  
 ];
 
 const categories = ["All", "Automation", "IT & Data", "Designing"];
