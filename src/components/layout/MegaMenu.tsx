@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const automationCourses = [
-  { title: "Automation Overview", href: "/courses" },
+  { title: "Automation Overview", href: "/courses/industrial-automation-overview" },
   { title: "Post Graduate Diploma in Industrial Automation", href: "/courses/pgdia" },
   { title: "PLC/SCADA/HMI Training", href: "/courses/plc-scada-training" },
   { title: "Industrial Automation & Robotics", href: "/courses/industrial-automation-robotics" },

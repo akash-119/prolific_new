@@ -1,6 +1,246 @@
 import { Course } from "./types";
 
 export const automationCourses: Course[] = [
+  // Course 1 automation overview
+  {
+  id: "industrial-automation-overview",
+  slug: "industrial-automation-overview",
+  title: "Industrial Automation & Control Systems",
+  category: "Automation",
+  subCategory: "Control Systems",
+  duration: "6 Months",
+  mode: ["Classroom"],
+  fees: {
+    original: 85000,
+    discounted: 75000,
+    currency: "INR"
+  },
+  thumbnail: "/images/courses/automation.jpg",
+  shortDescription: "Comprehensive training in industrial automation covering PLC, SCADA, DCS, and control systems for modern manufacturing environments.",
+  
+  overview: {
+    description: `Industrial automation is the application of technology, programs, robotics, and control systems to achieve manufacturing outcomes with minimal human input [web:13]. This transformative approach replaces repetitive manual tasks with intelligent automated systems that enhance productivity, quality, and operational safety across industrial environments [web:11].
+
+The automation landscape encompasses various control technologies including Programmable Logic Controllers (PLCs), Supervisory Control and Data Acquisition (SCADA) systems, Distributed Control Systems (DCS), robotics, and Industrial Internet of Things (IIoT) integration [web:17]. These systems work cohesively to create efficient, data-driven operations capable of 24/7 production with consistent precision and quality standards [web:11].
+
+With Industry 4.0 driving digital transformation in manufacturing, automation professionals are in high demand across automotive, pharmaceutical, food and beverage, oil and gas, and smart manufacturing sectors [web:17]. This program prepares you for high-paying careers with comprehensive hands-on training in industry-standard automation platforms and real-world project implementation [web:16].`,
+    
+    objectives: [
+      "Understand fundamentals of industrial automation and control systems",
+      "Master PLC programming using ladder logic, function blocks, and structured text",
+      "Design and configure SCADA systems for process monitoring and control",
+      "Implement DCS for complex continuous process industries",
+      "Integrate sensors, actuators, and field devices with control networks",
+      "Develop Human Machine Interfaces (HMI) for industrial applications",
+      "Implement Industry 4.0 concepts and IoT integration",
+      "Troubleshoot and optimize automated systems for maximum efficiency"
+    ],
+    
+    whoShouldAttend: [
+      "Electrical and Electronics Engineers",
+      "Instrumentation and Control Engineers",
+      "Manufacturing and Production Engineers",
+      "Maintenance engineers and technicians",
+      "Fresh engineering graduates entering industrial automation",
+      "Career switchers interested in automation technology"
+    ],
+    
+    prerequisites: "Basic understanding of electrical circuits and control systems recommended. Programming knowledge is helpful but not mandatory.",
+    
+    certifications: ["ISO 9001-2008 Certified", "NSDC Approved"],
+    
+    tools: ["Siemens TIA Portal", "Allen Bradley Studio 5000", "WinCC SCADA", "DeltaV DCS", "Factory I/O", "PLCSim", "Wonderware InTouch"]
+  },
+  
+  curriculum: {
+    totalModules: 10,
+    totalHours: 200,
+    modules: [
+      {
+        moduleNumber: 1,
+        title: "Introduction to Industrial Automation",
+        duration: "15 hours",
+        topics: [
+          "Evolution and types of automation systems",
+          "Fixed, programmable, and flexible automation",
+          "Industry 4.0 and smart manufacturing concepts",
+          "Automation system architecture and components",
+          "Safety standards and industrial protocols"
+        ]
+      },
+      {
+        moduleNumber: 2,
+        title: "PLC Fundamentals",
+        duration: "25 hours",
+        topics: [
+          "PLC architecture and working principles",
+          "Input/Output modules and wiring",
+          "Scan cycle and program execution",
+          "Number systems and data types",
+          "Memory organization and addressing"
+        ]
+      },
+      {
+        moduleNumber: 3,
+        title: "PLC Programming Languages",
+        duration: "30 hours",
+        topics: [
+          "Ladder Logic programming",
+          "Function Block Diagrams (FBD)",
+          "Structured Text (ST) programming",
+          "Sequential Function Charts (SFC)",
+          "Instruction List (IL) and best practices"
+        ]
+      },
+      {
+        moduleNumber: 4,
+        title: "Siemens PLC Training",
+        duration: "25 hours",
+        topics: [
+          "TIA Portal environment and configuration",
+          "S7-1200 and S7-1500 programming",
+          "Data blocks and function blocks",
+          "Communication and networking",
+          "Diagnostic and troubleshooting"
+        ]
+      },
+      {
+        moduleNumber: 5,
+        title: "Allen Bradley PLC Training",
+        duration: "20 hours",
+        topics: [
+          "Studio 5000 / RSLogix programming",
+          "ControlLogix and CompactLogix platforms",
+          "Tag-based programming",
+          "FactoryTalk integration",
+          "Motion control basics"
+        ]
+      },
+      {
+        moduleNumber: 6,
+        title: "SCADA Systems",
+        duration: "25 hours",
+        topics: [
+          "SCADA architecture and components",
+          "WinCC SCADA configuration",
+          "Graphics and animation design",
+          "Alarming and event management",
+          "Historical data logging and trending",
+          "Recipe management and reporting"
+        ]
+      },
+      {
+        moduleNumber: 7,
+        title: "DCS and Process Control",
+        duration: "20 hours",
+        topics: [
+          "DCS architecture and applications",
+          "Control strategies and PID tuning",
+          "Process loop configuration",
+          "Batch and continuous process control",
+          "Redundancy and fault tolerance"
+        ]
+      },
+      {
+        moduleNumber: 8,
+        title: "Industrial Networks",
+        duration: "15 hours",
+        topics: [
+          "PROFINET and PROFIBUS protocols",
+          "EtherNet/IP communication",
+          "Modbus RTU and TCP/IP",
+          "OPC UA and data integration",
+          "Network design and troubleshooting"
+        ]
+      },
+      {
+        moduleNumber: 9,
+        title: "Industrial Projects",
+        duration: "20 hours",
+        topics: [
+          "Conveyor control systems",
+          "Bottling plant automation",
+          "Packaging line integration",
+          "Temperature control systems",
+          "Motor control and VFD integration",
+          "Complete plant automation project"
+        ]
+      },
+      {
+        moduleNumber: 10,
+        title: "Placement Preparation",
+        duration: "12 hours",
+        topics: [
+          "Resume building for automation engineers",
+          "Technical interview preparation",
+          "Mock interviews and aptitude tests",
+          "Industry expectations and soft skills",
+          "Job market trends and placement support"
+        ]
+      }
+    ]
+  },
+  
+  instructor: {
+    name: "Er. Rajesh Kumar",
+    designation: "Senior Automation Consultant",
+    experience: "15+ years",
+    photo: "/images/instructors/rajesh.jpg",
+    bio: "Automation expert with extensive experience in automotive and pharmaceutical industries. Certified Siemens and Rockwell Automation professional with hands-on experience in large-scale automation projects."
+  },
+  
+  batchDetails: {
+    upcomingBatches: [
+      { date: "2026-01-25", timing: "9:00 AM - 1:00 PM", mode: "Classroom", seats: 12 },
+      { date: "2026-02-20", timing: "2:00 PM - 6:00 PM", mode: "Classroom", seats: 15 }
+    ],
+    batchSize: "Max 15 students per batch"
+  },
+  
+  careerOpportunities: [
+    "PLC Programmer",
+    "SCADA Engineer",
+    "Automation Engineer",
+    "Control Systems Engineer",
+    "Instrumentation Engineer",
+    "Manufacturing Automation Specialist",
+    "Industrial IoT Engineer"
+  ],
+  
+  placementStats: {
+    averagePackage: "4 - 8 LPA",
+    hiringCompanies: ["Siemens", "ABB", "Rockwell Automation", "Schneider Electric", "L&T", "Honeywell", "Emerson", "TATA Projects"]
+  },
+  
+  relatedCourses: ["industrial-automation-robotics", "dcs-training", "instrumentation-training"],
+  
+  faqs: [
+    {
+      question: "Do I need prior programming experience?",
+      answer: "No, we start from fundamentals. Basic electrical knowledge is sufficient to begin this course."
+    },
+    {
+      question: "Which PLC brands will I learn?",
+      answer: "You'll get hands-on training on Siemens (TIA Portal) and Allen Bradley (Studio 5000) - the two most widely used PLC platforms globally."
+    },
+    {
+      question: "Is practical training included?",
+      answer: "Yes, you'll work on actual PLCs, SCADA systems, and complete industrial projects in our fully equipped automation lab."
+    },
+    {
+      question: "What is the average salary after this course?",
+      answer: "Automation engineers in India typically earn between ₹4-8 LPA initially, with experienced professionals earning significantly higher packages."
+    }
+  ],
+  
+  syllabusFile: "/pdfs/automation-syllabus.pdf",
+  brochureFile: "/pdfs/prolific-automation-brochure.pdf"
+},
+// end of course 1
+
+// Course 2 PLC SCADA Training
+
+
   {
     id: "plc-scada-training",
     slug: "plc-scada-training",
