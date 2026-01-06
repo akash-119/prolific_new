@@ -50,6 +50,8 @@ interface Student {
 const ITEMS_PER_PAGE = 10;
 
 const AdminStudents = () => {
+  console.log('[DEBUG] AdminStudents component rendered');
+  
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -70,6 +72,7 @@ const AdminStudents = () => {
   const [formLoading, setFormLoading] = useState(false);
 
   useEffect(() => {
+    console.log('[DEBUG] AdminStudents useEffect - fetching students, page:', currentPage, 'search:', searchTerm);
     fetchStudents();
   }, [currentPage, searchTerm]);
 

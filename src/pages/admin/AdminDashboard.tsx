@@ -35,6 +35,8 @@ interface RecentCertificate {
 }
 
 const AdminDashboard = () => {
+  console.log('[DEBUG] AdminDashboard component rendered');
+  
   const [stats, setStats] = useState<DashboardStats>({
     totalCertificates: 0,
     validCertificates: 0,
@@ -46,6 +48,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log('[DEBUG] AdminDashboard useEffect - fetching data');
     fetchDashboardData();
   }, []);
 

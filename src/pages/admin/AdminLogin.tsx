@@ -20,9 +20,6 @@ const AdminLogin = () => {
   useEffect(() => {
     if (!loading && user && isAdmin) {
       navigate('/admin/dashboard');
-    } else if (!loading && user && !isAdmin) {
-      // User is logged in but doesn't have admin role
-      toast.error("You do not have admin access. Please contact support.");
     }
   }, [user, isAdmin, loading, navigate]);
 
@@ -44,7 +41,7 @@ const AdminLogin = () => {
         return;
       }
 
-      toast.success("Login successful! Checking permissions...");
+      toast.success("Login successful!");
       // Navigation will happen via the useEffect when isAdmin is set
     } catch (error) {
       toast.error("An error occurred during login");

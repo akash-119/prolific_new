@@ -69,6 +69,8 @@ interface Certificate {
 const ITEMS_PER_PAGE = 10;
 
 const AdminCertificates = () => {
+  console.log('[DEBUG] AdminCertificates component rendered');
+  
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
@@ -90,6 +92,7 @@ const AdminCertificates = () => {
   const [formLoading, setFormLoading] = useState(false);
 
   useEffect(() => {
+    console.log('[DEBUG] AdminCertificates useEffect - fetching data, page:', currentPage);
     fetchCertificates();
     fetchStudents();
   }, [currentPage, searchTerm, statusFilter]);

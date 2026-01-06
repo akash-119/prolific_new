@@ -59,10 +59,6 @@ CREATE TABLE public.certificate_counter (
   UNIQUE(year)
 );
 
-
-INSERT INTO user_roles (user_id, role) VALUES ('akash@gmail.com', 'admin');
-
-
 -- Initialize current year counter
 INSERT INTO public.certificate_counter (id, year, counter) VALUES (1, 2026, 0);
 

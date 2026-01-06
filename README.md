@@ -1,236 +1,97 @@
-# Vite React Shadcn TypeScript Project
+# Prolific Automation - Certificate Management System
 
-A modern, fast, and fully-featured React application built with Vite, TypeScript, Shadcn UI, and Tailwind CSS.
+A full-stack web application for managing training certificates at Prolific Systems & Technologies.
 
-## 🚀 Features
+## Features
 
-- ⚡️ **Vite** - Lightning fast build tool and dev server
-- ⚛️ **React 18** - Latest React with hooks and concurrent features
-- 🎨 **Shadcn UI** - Beautiful, accessible component library
-- 🎭 **Tailwind CSS** - Utility-first CSS framework
-- 📝 **TypeScript** - Type-safe code with excellent DX
-- 🔄 **React Router** - Client-side routing
-- 📊 **Recharts** - Composable charting library
-- 🎯 **React Hook Form** - Performant form validation
-- 🔍 **Zod** - TypeScript-first schema validation
-- 🎬 **Framer Motion** - Production-ready motion library
-- 📈 **Vercel Analytics** - Web analytics
-- 🌙 **Dark Mode** - Built-in theme switching
+### Public Features
+- **Certificate Verification** (`/verify`) - Public page to verify certificate authenticity
+- **Certificate View** (`/certificate/:number`) - View and print certificate details with QR code
+- **Course Catalog** - Browse all training courses offered
+- **Contact & About Pages** - Company information and contact forms
 
-## 📦 Tech Stack
+### Admin Features
+- **Admin Dashboard** (`/admin/dashboard`) - Overview with stats and recent certificates
+- **Student Management** (`/admin/students`) - CRUD operations for student records
+- **Certificate Management** (`/admin/certificates`) - Generate, edit, and revoke certificates
+- Auto-generated certificate numbers (PROLIFIC-YYYY-XXXXXX format)
 
-### Core
-- [Vite](https://vitejs.dev/) - Build tool
-- [React](https://react.dev/) - UI library
-- [TypeScript](https://www.typescriptlang.org/) - Type safety
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
+## Tech Stack
 
-### UI Components
-- [Radix UI](https://www.radix-ui.com/) - Unstyled, accessible components
-- [Shadcn UI](https://ui.shadcn.com/) - Re-usable components
-- [Lucide React](https://lucide.dev/) - Beautiful icons
-- [Framer Motion](https://www.framer.com/motion/) - Animations
+- **Frontend**: React + TypeScript + Vite
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Animation**: Framer Motion + GSAP
+- **Backend**: Lovable Cloud
+- **Database**: PostgreSQL with Row Level Security
+- **Authentication**: Email/Password with role-based access
 
-### Form & Validation
-- [React Hook Form](https://react-hook-form.com/) - Form management
-- [Zod](https://zod.dev/) - Schema validation
+## Database Schema
 
-### Routing & State
-- [React Router](https://reactrouter.com/) - Routing
-- [TanStack Query](https://tanstack.com/query) - Server state management
+### Tables
+- `students` - Student information (name, email, phone, course, center)
+- `certificates` - Certificate records with auto-generated numbers
+- `user_roles` - Admin role assignments
+- `profiles` - User profile data
+- `certificate_counter` - Sequential numbering for certificates
 
-### Analytics & Monitoring
-- [Vercel Analytics](https://vercel.com/analytics) - Web analytics
+## Getting Started
 
-## 🛠️ Installation
-
-### Prerequisites
-
-Make sure you have the following installed:
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-
-You can install Node.js using [nvm](https://github.com/nvm-sh/nvm#installing-and-updating):
-
-```bash
-# Install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
-# Install Node.js
-nvm install 18
-nvm use 18
-```
-
-### Setup
-
-1. **Clone the repository**
-
-```bash
-git clone <YOUR_GIT_URL>
-cd <YOUR_PROJECT_NAME>
-```
-
-2. **Install dependencies**
-
-```bash
+### Development
+```sh
+# Install dependencies
 npm install
-# or
-yarn install
-```
 
-3. **Start development server**
-
-```bash
+# Run development server
 npm run dev
-# or
-yarn dev
 ```
 
-The application will be available at `http://localhost:5173`
+### Creating Admin User
+To create an admin user:
+1. Sign up via the authentication system
+2. Add admin role to the user via the backend database
 
-## 📜 Available Scripts
-
-```bash
-# Start development server with hot reload
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build locally
-npm run preview
-
-# Run ESLint for code quality
-npm run lint
-
-# Type check with TypeScript
-tsc --noEmit
-```
-
-## 🏗️ Project Structure
+## Project Structure
 
 ```
-├── src/
-│   ├── components/     # Reusable UI components
-│   │   └── ui/        # Shadcn UI components
-│   ├── hooks/         # Custom React hooks
-│   ├── lib/           # Utility functions and configs
-│   ├── pages/         # Page components
-│   ├── styles/        # Global styles
-│   ├── types/         # TypeScript type definitions
-│   ├── App.tsx        # Main app component
-│   └── main.tsx       # Entry point
-├── public/            # Static assets
-├── index.html         # HTML template
-├── vite.config.ts     # Vite configuration
-├── tailwind.config.ts # Tailwind configuration
-├── tsconfig.json      # TypeScript configuration
-└── package.json       # Dependencies and scripts
+src/
+├── components/
+│   ├── admin/           # Admin layout components
+│   ├── home/            # Homepage sections
+│   ├── layout/          # Main layout (Navbar, Footer, etc.)
+│   └── ui/              # shadcn/ui components
+├── data/                # Course data
+├── hooks/               # Custom React hooks
+├── pages/
+│   ├── admin/           # Admin pages
+│   └── ...              # Public pages
+└── integrations/        # Backend client
 ```
 
-## 🎨 Customization
+## Routes
 
-### Adding New Components
+### Public Routes
+- `/` - Homepage
+- `/about` - About Us
+- `/contact` - Contact Page
+- `/courses` - All Courses
+- `/courses/:slug` - Individual Course Page
+- `/verify` - Certificate Verification
+- `/certificate/:number` - Certificate View/Print
+- `/placements` - Placements Information
+- `/gallery` - Office Gallery
 
-Use Shadcn CLI to add new components:
+### Admin Routes (Protected)
+- `/admin/login` - Admin Login
+- `/admin/dashboard` - Dashboard
+- `/admin/students` - Student Management
+- `/admin/certificates` - Certificate Management
 
-```bash
-npx shadcn-ui@latest add button
-npx shadcn-ui@latest add card
-npx shadcn-ui@latest add dialog
-```
+## Deployment
 
-### Theming
+1. Build: `npm run build`
+2. Deploy the `dist/` folder to your hosting provider
+3. Or use Lovable Publish for one-click deployment
 
-Modify `src/index.css` to customize your theme colors:
+## License
 
-```css
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  /* ... */
-}
-```
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-VITE_API_URL=https://api.example.com
-VITE_APP_TITLE=My App
-```
-
-Access in your code:
-
-```typescript
-const apiUrl = import.meta.env.VITE_API_URL;
-```
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import project on [Vercel](https://vercel.com)
-3. Vercel will auto-detect Vite and deploy
-
-### Netlify
-
-1. Build the project: `npm run build`
-2. Deploy the `dist` folder to Netlify
-
-### Other Platforms
-
-Build command: `npm run build`  
-Output directory: `dist`
-
-## 🧪 Testing
-
-```bash
-# Add your testing framework
-npm install -D vitest @testing-library/react
-```
-
-## 📝 Code Quality
-
-### ESLint Configuration
-
-The project uses ESLint with React and TypeScript rules. Configuration can be found in `eslint.config.js`.
-
-### TypeScript
-
-Strict mode is enabled for better type safety. Check `tsconfig.json` for configuration.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Shadcn UI](https://ui.shadcn.com/) - Amazing component library
-- [Radix UI](https://www.radix-ui.com/) - Accessible primitives
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
-- [Vite](https://vitejs.dev/) - Next generation frontend tooling
-
-## 📞 Support
-
-For issues and questions:
-- Open an issue on GitHub
-- Check existing discussions
-- Review the documentation
-
----
-
-**Built with ❤️ using Vite + React + TypeScript**
+© 2026 Prolific Systems & Technologies. All Rights Reserved.

@@ -15,7 +15,6 @@ export const useAuth = () => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        
         // Defer admin check to prevent deadlock
         if (session?.user) {
           setTimeout(() => {
@@ -51,14 +50,8 @@ export const useAuth = () => {
         .eq('role', 'admin')
         .maybeSingle();
       
-      const hasAdminRole = !!data && !error;
-      setIsAdmin(hasAdminRole);
-      
-      if (!hasAdminRole) {
-        console.warn(`User ${userId} does not have admin role`);
-      }
+      setIsAdmin(!!data && !error);
     } catch (error) {
-      console.error('Error checking admin role:', error);
       setIsAdmin(false);
     } finally {
       setLoading(false);

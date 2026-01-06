@@ -20,7 +20,6 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminStudents from "./pages/admin/AdminStudents";
 import AdminCertificates from "./pages/admin/AdminCertificates";
 
-
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -46,9 +45,7 @@ const App = () => (
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/students" element={<AdminStudents />} />
           <Route path="/admin/certificates" element={<AdminCertificates />} />
-
           
-
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>

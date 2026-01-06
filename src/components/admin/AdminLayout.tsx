@@ -24,8 +24,17 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  console.log('[DEBUG] AdminLayout rendered', { 
+    user: user?.email, 
+    isAdmin, 
+    loading, 
+    currentPath: location.pathname 
+  });
+
   useEffect(() => {
+    console.log('[DEBUG] AdminLayout auth check', { user: !!user, loading });
     if (!loading && !user) {
+      console.log('[DEBUG] No user, redirecting to login');
       navigate('/admin/login');
     }
   }, [user, loading, navigate]);
@@ -50,8 +59,27 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     );
   }
 
-  if (!user || !isAdmin) {
+  if (!user) {
     return null;
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="bg-card border border-border rounded-xl p-8 max-w-md text-center">
+          <h1 className="text-xl font-bold text-foreground mb-2">Access Denied</h1>
+          <p className="text-muted-foreground mb-4">
+            Your account ({user.email}) does not have admin privileges.
+          </p>
+          <p className="text-sm text-muted-foreground mb-6">
+            Please contact the system administrator to get admin access.
+          </p>
+          <Button onClick={handleSignOut} variant="outline">
+            Sign Out
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   const menuItems = [
@@ -101,7 +129,10 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                       ? 'bg-primary text-primary-foreground' 
                       : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
-                  onClick={() => setSidebarOpen(false)}
+                  onClick={() => {
+                    console.log('[DEBUG] Navigation clicked:', item.path);
+                    setSidebarOpen(false);
+                  }}
                 >
                   <item.icon className="h-5 w-5" />
                   <span className="font-medium">{item.label}</span>
