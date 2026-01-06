@@ -10,6 +10,7 @@ import Courses from "./pages/Courses";
 import CoursePage from "./pages/CoursePage";
 import CertificateVerification from "./pages/CertificateVerification";
 import CertificateView from "./pages/CertificateView";
+// import CertificateVerification from "./pages/CertificateVerification";
 import Placements from "./pages/Placements";
 import Gallery from "./pages/Gallery";
 import NotFound from "./pages/NotFound";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/courses/:slug" element={<CoursePage />} />
           <Route path="/verify" element={<CertificateVerification />} />
           <Route path="/certificate/:certificateNumber" element={<CertificateView />} />
+          {/* <Route path="/verify" element={<CertificateVerification />} /> */}
           <Route path="/placements" element={<Placements />} />
           <Route path="/gallery" element={<Gallery />} />
           
