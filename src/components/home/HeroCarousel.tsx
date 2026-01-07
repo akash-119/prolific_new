@@ -12,7 +12,7 @@ const slides = [
   {
     id: 1,
     image: heroAutomation,
-    heading: "Pioneer in Industrial Automation Training Since 1997",
+    heading: "Prolific in Industrial Automation Training Since 1997",
     subheading: "Transform Your Career with Industry-Leading Certification Programs",
     stats: "30+ Branches | 1.2 Lakh+ Students Trained | 600+ Corporate Partners",
     primaryCTA: { label: "Explore Courses", href: "/courses" },

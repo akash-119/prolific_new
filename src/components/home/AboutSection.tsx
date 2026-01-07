@@ -9,7 +9,7 @@ import heroCenter from "@/assets/hero-training-center.jpg";
 gsap.registerPlugin(ScrollTrigger);
 
 const highlights = [
-  "Pioneer in industrial automation training since 1997",
+  "Prolific in industrial automation training since 1997",
   "Trained over 10,500 students/professionals annually",
   "500+ in-plant training programs executed",
   "Partnered with 50+ Fortune 1000 companies",
