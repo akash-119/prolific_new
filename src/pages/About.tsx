@@ -14,7 +14,6 @@ const timeline = [
 
 const values = [
   { icon: Target, title: "Mission", description: "To provide world-class industrial training that bridges the gap between academic knowledge and industry requirements." },
-  { icon: Eye, title: "Vision", description: "To be the most trusted and preferred industrial automation training institute in Asia." },
   { icon: Heart, title: "Values", description: "Excellence, Integrity, Innovation, and Student Success drive everything we do." },
 ];
 
@@ -36,7 +35,7 @@ const About = () => {
               About Prolific Systems & Technologies
             </h1>
             <p className="text-xl text-primary-foreground/80">
-              Pioneer in Industrial Automation Training Since 1997
+              Prolific in Industrial Automation Training Since 1997
             </p>
           </motion.div>
         </div>

@@ -74,10 +74,12 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button variant="hero" size="lg">
-              <Download className="h-4 w-4" />
-              Download Brochure
-            </Button>
+            <a href="https://drive.google.com/file/d/1Ac7L2ZA6QDrwGlurN8qunPs457tpk9Gx/view" target="_blank" rel="noopener noreferrer">
+              <Button variant="hero" size="lg">
+                <Download className="h-4 w-4" />
+                Download Brochure
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -115,10 +117,12 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="pt-4">
-                <Button variant="hero" size="lg" className="w-full">
-                  <Download className="h-4 w-4" />
-                  Download Brochure
-                </Button>
+                <a href="https://drive.google.com/file/d/1Ac7L2ZA6QDrwGlurN8qunPs457tpk9Gx/view" target="_blank" rel="noopener noreferrer" className="block">
+                  <Button variant="hero" size="lg" className="w-full">
+                    <Download className="h-4 w-4" />
+                    Download Brochure
+                  </Button>
+                </a>
               </div>
             </div>
           </motion.div>
